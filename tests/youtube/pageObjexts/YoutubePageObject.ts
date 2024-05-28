@@ -38,11 +38,13 @@ export class YoutubePage implements IYoutubePage {
 
         const lstTitleVideo = await randomVideo.$('a#video-title');
         const titleVideoSelect = await lstTitleVideo?.textContent();
-
         console.log(titleVideoSelect);
 
         await randomVideo.click();
-        
-        expect(titleVideoSelect).toContain(randomSong.nameSong);
+        await this.validateSong(titleVideoSelect);
+    }
+
+    async validateSong(titleVideo: string|null|undefined): Promise<void> {
+        expect(titleVideo).toContain(randomSong.nameSong);
     }
 }
