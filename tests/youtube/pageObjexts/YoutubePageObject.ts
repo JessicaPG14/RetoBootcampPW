@@ -1,6 +1,7 @@
 import { Browser, expect, Page } from '@playwright/test'
 import { IYoutubePage } from '../interfaces/YoutubeUI';
-import { Context } from 'vm';
+import { RandomUtils } from '../namespace/random.namespace';
+import { randomSong, songs } from '../data/songs.data';
 
 
 export class YoutubePage implements IYoutubePage {
@@ -32,8 +33,7 @@ export class YoutubePage implements IYoutubePage {
 
     async selectVideo(): Promise<void> {
         const lstVideos = await this.page.$$('ytd-video-renderer');
-        const index = Math.floor(Math.random() * lstVideos.length);
-        const randomVideo = lstVideos[index];
+        const randomVideo = RandomUtils.getRandomElement(lstVideos);
         await this.page.waitForTimeout(5000);
 
         const lstTitleVideo = await randomVideo.$('a#video-title');
@@ -42,11 +42,7 @@ export class YoutubePage implements IYoutubePage {
         console.log(titleVideoSelect);
 
         await randomVideo.click();
-        
-        const lblTitleVideoOpen = await this.page.$('#title > h1');
-        const titleVideoOpen = await lblTitleVideoOpen?.textContent();
 
-        console.log(titleVideoOpen)
-        //expect(lblTitleVideoOpen).toBe(titleVideoSelect);
+        expect(titleVideoSelect).toContain(randomSong.nameSong);
     }
 }

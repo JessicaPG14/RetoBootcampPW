@@ -1,13 +1,9 @@
+import { RandomUtils } from "../namespace/random.namespace";
+
 export const songs = [
-    {nameSong: 'Amantes, Daniel Calderon'},
+    {nameSong: 'Amantes'},
     {nameSong: 'Manos de Tijera'},
-    {nameSong: 'Cigarrillo, Ana Gabriel'}
+    {nameSong: 'Cigarrillo'}
 ]
 
-function getSong(songs: { nameSong: string }[]): { nameSong: string } {
-    const index = Math.floor(Math.random() * songs.length);
-    return songs[index];
-}
-
-export const randomSong = getSong(songs);
-
+export const randomSong = RandomUtils.getRandomElement(songs);
