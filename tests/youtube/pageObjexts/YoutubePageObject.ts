@@ -42,7 +42,7 @@ export class YoutubePage implements IYoutubePage {
         console.log(titleVideoSelect);
 
         await randomVideo.click();
-
+        
         expect(titleVideoSelect).toContain(randomSong.nameSong);
     }
 }

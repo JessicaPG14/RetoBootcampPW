@@ -9,7 +9,6 @@ test.describe('Youtube Test', () => {
 
         await youtubePage.goto();
         await youtubePage.searchSong(randomSong.nameSong);
-
         await youtubePage.selectVideo();
     })
 })
